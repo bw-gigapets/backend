@@ -7,6 +7,9 @@ exports.up = async function(knex) {
             .unique()
         table.string("category")
             .notNullable()
+        table.integer("food_weight")
+            .notNullable()
+            .defaultTo(0)
     })
 };
 

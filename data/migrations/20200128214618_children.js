@@ -5,7 +5,7 @@ exports.up = async function(knex) {
         table.string("name")
             .notNullable()
         table.integer("age")
-        table.string("weight")
+        table.integer("weight")
         table.integer("user_id")
             .notNullable()
             .references("id")

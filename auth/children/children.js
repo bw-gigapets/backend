@@ -4,7 +4,7 @@ const router = express.Router()
 const childrenModel = require("./children-model")
 
 // creates a child under user id
-// /api/auth/users/
+// /api/auth/user_id/
 router.post("/:id/children", async (req, res, next) => {
     try {
         const id = req.params.id

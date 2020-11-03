@@ -1,5 +1,5 @@
 const express = require("express")
-const router = express.Router()
+const router = express.Router({mergeParams: true})
 const bcrypt = require("bcryptjs")
 
 const restricted = require("../middleware/restricted")
@@ -45,7 +45,7 @@ router.post("/login", async (req, res, next) => {
     try {
         const { username, password } = req.body
         const user = await usersModel.findBy({ username }).first()
-        const verifyPassword = await bcrypt.compare(password, user.password)        
+        const verifyPassword = await bcrypt.compare(password, user.password)
 
         if (user && verifyPassword) {
             const token = await generateToken(user)
