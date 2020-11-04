@@ -1,12 +1,14 @@
 const express = require("express")
-const router = express.Router()
+const router = express.Router({mergeParams: true})
+const checkId = require("../../middleware/check_id")
 
 const childrenModel = require("./children-model")
 
 // creates a child under user id
-// /api/auth/user_id/
-router.post("/:id/children", async (req, res, next) => {
+// /api/auth/users/user_id
+router.post("/:id/children", checkId, async (req, res, next) => {
     try {
+        console.log(req.params, "PARAMS FROM CHILDREN")
         const id = req.params.id
         const child = {
             name: req.body.name,
@@ -28,7 +30,7 @@ router.post("/:id/children", async (req, res, next) => {
 })
 
 // edits a child
-router.put("/:id/children/:name", async (req, res, next) => {
+router.put("/:id/children/:name", checkId, async (req, res, next) => {
     try {
         const id = req.params.id
         const name = req.params.name
@@ -46,7 +48,7 @@ router.put("/:id/children/:name", async (req, res, next) => {
 })
 
 // deletes a child
-router.delete("/:id/children/:name", async (req, res, status) => {
+router.delete("/:id/children/:name", checkId, async (req, res, status) => {
     try {
         const name = req.params.name
         const deleted = childrenModel.deleteChild(name)

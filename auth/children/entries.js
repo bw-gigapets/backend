@@ -1,10 +1,11 @@
 const express = require("express")
-const router = express.Router()
+const router = express.Router({mergeParams: true})
+const checkId = require("../../middleware/check_id")
 
 const entriesModel = require("./entries-model")
 
 // create an entry for a child
-router.post("/:id/entries/:name", async (req, res, next) => {
+router.post("/:id/entries/:name", checkId, async (req, res, next) => {
     try {
         const id = req.params.id
         const name = req.params.name
@@ -24,7 +25,7 @@ router.post("/:id/entries/:name", async (req, res, next) => {
 })
 
 // gets all entries for the user (not child)
-router.get("/:id/entries", async (req, res, next) => {
+router.get("/:id/entries", checkId, async (req, res, next) => {
     try {
         const entries = await entriesModel.getAllEntries(req.params.id)
 
@@ -45,7 +46,7 @@ router.get("/:id/entries", async (req, res, next) => {
 })
 
 // edit an entry
-router.put("/:userId/entries/:name/:entryId", async (req, res, next) => {
+router.put("/:userId/entries/:name/:entryId", checkId, async (req, res, next) => {
     try {
         const entryId = req.params.entryId
         const changes = req.body
@@ -63,7 +64,7 @@ router.put("/:userId/entries/:name/:entryId", async (req, res, next) => {
 })
 
 // deletes an entry
-router.delete("/:userId/entries/:name/:entryId", async (req, res, next) => {
+router.delete("/:userId/entries/:name/:entryId", checkId, async (req, res, next) => {
     try {
         const id = req.params.entryId
 

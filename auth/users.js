@@ -1,5 +1,5 @@
 const express = require("express")
-const router = express.Router({mergeParams: true})
+const router = express.Router()
 const bcrypt = require("bcryptjs")
 
 const restricted = require("../middleware/restricted")
@@ -156,7 +156,7 @@ router.get("/users/logout", restricted, async (req, res, next) => {
     }
 })
 
-router.use("/users", restricted, checkId, entries)
-router.use("/users", restricted, checkId, children)
+router.use("/users", restricted, entries)
+router.use("/users", restricted, children)
 
 module.exports = router
