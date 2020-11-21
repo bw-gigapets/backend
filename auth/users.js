@@ -10,6 +10,7 @@ const entries = require("./children/entries")
 const children = require("./children/children")
 
 // creates a new user
+// /api/auth
 router.post("/register", async (req, res, next) => {
     try {
         const username = req.body.username
@@ -52,6 +53,10 @@ router.post("/login", async (req, res, next) => {
 
             res.status(200).json({
                 message: `Welcome ${user.username}`,
+				user: {
+					...user,
+					password: null
+				},
                 token
             })
         } else {

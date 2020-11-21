@@ -5,7 +5,7 @@
 Welcome to the Gigapets backend API.  You can access the website by going to [https://ken-gigapets.herokuapp.com/] (https://ken-gigapets.herokuapp.com/)
 ___
 
-- Status code 500 error is defaulted to:
+Status code 500 error returns:
 | Key       | Value                      |
 | --------- | -------------------------- |
 | "message" | "Internal server error..." |
@@ -15,7 +15,7 @@ ___
 
 `Route: /`
 
-Successful:
+Returns:
 | Key       | Value                     |
 | --------- | ------------------------- |
 | "message" | "Welcome to the website!" |
@@ -25,7 +25,7 @@ ___
 
 ##### Non-Restricted Routes
 
-`Route: /api/auth/register`
+Register a user: `Route: /api/auth/register`
 
 Parameters:
 | Key            | Required |
@@ -35,7 +35,7 @@ Parameters:
 | **first_name** | No       |
 | **last_name**  | No       |
 
-Upon successful request:
+Returns:
 | Key       | Value                   |
 | --------- | ----------------------- |
 | "message" | "User has been created" |
@@ -53,3 +53,16 @@ Error - Either the username or password not given:
 | Key       | Value                                          |
 | --------- | ---------------------------------------------- |
 | "message" | "Both a username and a password are required." |
+___
+
+##### Restricted Routes
+
+Get user information: `Route: /api/auth/users/:id`
+
+Returns:
+| Value                   | Type   |
+| ----------------------- | ------ |
+| **username**            | string |
+| **first_name**          | string |
+| **last_name**           | string |
+| **children**            | array  |

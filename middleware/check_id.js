@@ -7,7 +7,7 @@ const jwt = require("jsonwebtoken")
 module.exports = (req, res, next) => {
     const id = req.params.id || req.params.userId
 
-    const payload = jwt.verify(req.headers.token, process.env.JWT_SECRET)
+    const payload = jwt.verify(req.headers.authorization, process.env.JWT_SECRET)
     console.log(req.params, "REQ")
     console.log(payload, "validated payload")
 

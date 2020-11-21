@@ -16,8 +16,9 @@ router.post("/:id/children", checkId, async (req, res, next) => {
             weight: req.body.weight,
             user_id: id
         }
-        
         const newChild = await childrenModel.createChild(id, child)
+
+        console.log(child, newChild, "FROM CHILDREN")
 
         res.status(201).json({
             message: "Child has been created.",
